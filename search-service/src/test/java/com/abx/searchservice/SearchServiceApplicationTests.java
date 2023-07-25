@@ -1,11 +1,13 @@
-package com.abx.postservice;
+package com.abx.searchservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PostServiceApplicationTests {
+class SearchServiceApplicationTests {
 
-    @Test
-    void contextLoads() {}
+	@Test
+	void contextLoads() {
+	}
+
 }
