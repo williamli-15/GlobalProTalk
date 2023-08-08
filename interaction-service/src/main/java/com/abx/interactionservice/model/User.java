@@ -7,12 +7,12 @@ import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
-public class Post {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private UUID postUuid;
+    private UUID userUuid;
 
     // Other fields, getters, setters, and constructors
 
@@ -24,12 +24,12 @@ public class Post {
         this.id = id;
     }
 
-    public UUID getPostUuid() {
-        return postUuid;
+    public UUID getUserUuid() {
+        return userUuid;
     }
 
-    public void setPostUuid(UUID postUuid) {
-        this.postUuid = postUuid;
+    public void setUserUuid(UUID userUuid) {
+        this.userUuid = userUuid;
     }
 
     // Add other fields, getters, setters, and constructors as needed

@@ -1,20 +1,16 @@
 -- db/migration/V1__create_comments_table.sql
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE IF NOT EXISTS comments (
-    comment_id SERIAL PRIMARY KEY,
-    post_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
+    comment_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    post_id UUID NOT NULL,
+    user_id UUID NOT NULL,
     content TEXT NOT NULL,
-    create_date TIMESTAMP NOT NULL,
+    created_timestamp TIMESTAMP DEFAULT current_timestamp,
+    updated_timestamp TIMESTAMP DEFAULT current_timestamp,
     is_deleted BOOLEAN DEFAULT false
-);
+    );
 
--- 添加外键约束，关联到帖子表中的帖子
-ALTER TABLE comments ADD CONSTRAINT fk_comments_post
-    FOREIGN KEY (post_id)
-        REFERENCES posts (post_id);
-
--- 添加外键约束，关联到用户表中的用户
-ALTER TABLE comments ADD CONSTRAINT fk_comments_user
-    FOREIGN KEY (user_id)
-        REFERENCES users (user_id);
+CREATE INDEX ON comments (post_id);
+CREATE INDEX ON comments (user_id);

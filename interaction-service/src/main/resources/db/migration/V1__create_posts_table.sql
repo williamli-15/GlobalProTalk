@@ -1,14 +1,18 @@
+-- db/migration/V1__Create_Posts_Table.sql
+
 CREATE TABLE IF NOT EXISTS posts (
-    post_id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
+    post_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    create_date TIMESTAMP DEFAULT current_timestamp NOT NULL,
-    update_date TIMESTAMP DEFAULT current_timestamp NOT NULL,
-    is_deleted BOOLEAN DEFAULT false NOT NULL
+    favorite_count BIGINT NOT NULL DEFAULT 0,
+    comment_count BIGINT NOT NULL DEFAULT 0,
+    is_favorite BOOLEAN NOT NULL DEFAULT false,
+    is_deleted BOOLEAN DEFAULT false,
+    created_timestamp TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    updated_timestamp TIMESTAMP NOT NULL DEFAULT current_timestamp
     );
 
--- 添加外键约束，关联到用户表中的用户
-ALTER TABLE posts ADD CONSTRAINT fk_posts_user
-    FOREIGN KEY (user_id)
-        REFERENCES users (user_id);
+-- 为 user_id 和 title 添加索引，提高查询效率
+CREATE INDEX idx_posts_user_id ON posts (user_id);
+CREATE INDEX idx_posts_title ON posts (title);
