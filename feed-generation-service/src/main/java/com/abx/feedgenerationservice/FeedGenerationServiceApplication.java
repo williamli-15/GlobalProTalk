@@ -9,5 +9,4 @@ public class FeedGenerationServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(FeedGenerationServiceApplication.class, args);
     }
-
 }
