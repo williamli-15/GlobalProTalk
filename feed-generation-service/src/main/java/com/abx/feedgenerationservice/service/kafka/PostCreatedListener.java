@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostCreatedListener {
 
-    private final String POST_CREATED_TOPIC = "post-created-topic";
     private final FeedGeneratorService feedGeneratorService;
 
     @Autowired
@@ -20,10 +19,10 @@ public class PostCreatedListener {
         this.feedGeneratorService = feedGeneratorService;
     }
 
-    @KafkaListener(topics = POST_CREATED_TOPIC, groupId = "group-post-created")
+    @KafkaListener(topics = "post-created-topic", groupId = "group-post-created")
     public void listenToPartition(@Payload Post post, @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) {
 
-        System.out.println("post: " + post + " from partition: " + partition);
+        //        System.out.println("post: " + post + " from partition: " + partition);
         feedGeneratorService.addToFeed(post);
     }
 }

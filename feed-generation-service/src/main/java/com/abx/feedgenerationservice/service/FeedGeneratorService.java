@@ -16,7 +16,7 @@ public class FeedGeneratorService {
     }
 
     public void addToFeed(Post post) {
-        System.out.println("adding post " + post + " to cassandra database...");
-        // feedRepository.save()
+        //        System.out.println("adding post " + post + " to cassandra database...");
+        //        feedRepository.save()
     }
 }
